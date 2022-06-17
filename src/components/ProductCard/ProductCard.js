@@ -14,9 +14,13 @@ const ProductCard = ({ product }) => {
     const cartItems = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    cartItems?.push(product);
+    if (cartItems.find((item) => item.id === product.id)) {
+      return cartItems;
+    } else {
+      cartItems?.push(product);
+    }
     localStorage.setItem("cart", JSON.stringify(cartItems));
-    setCart(JSON.parse(localStorage.getItem("cart")));
+    setCart(cartItems);
   };
 
   console.log(cart);
@@ -39,9 +43,7 @@ const ProductCard = ({ product }) => {
       </Info>
       <ButtonWrapper>
         <LocalMallOutlined onClick={() => handleAddToCart(product)} />
-        <FavoriteBorderOutlined
-          style={{ marginRight: "7px", marginLeft: "7px" }}
-        />
+        <FavoriteBorderOutlined />
         <VisibilityOutlined />
       </ButtonWrapper>
     </Wrapper>
@@ -90,5 +92,5 @@ const Info = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 `;

@@ -7,17 +7,25 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoriesContextProvider from "./contexts/CategoriesContext/CategoriesContext";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "rsuite/dist/rsuite.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ProductsListContextProvider from "./contexts/ProductsListContext/ProductsListContext";
+import CartContextProvider from "./contexts/CartContext/CartContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CategoriesContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
-      </BrowserRouter>
-    </CategoriesContextProvider>
+    <ProductsListContextProvider>
+      <CategoriesContextProvider>
+        <CartContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/*" element={<App />} />
+            </Routes>
+          </BrowserRouter>
+        </CartContextProvider>
+      </CategoriesContextProvider>
+    </ProductsListContextProvider>
   </React.StrictMode>
 );
 

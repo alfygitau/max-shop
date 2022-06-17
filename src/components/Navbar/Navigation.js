@@ -8,11 +8,15 @@ import {
 import { Link } from "react-router-dom";
 import { Badge } from "rsuite";
 import styled from "styled-components";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext/CartContext";
 
 // images
 import logo from "../../images/logo.svg";
 
 export const Navigation = () => {
+  const { cart } = useContext(CartContext);
+
   const linkStyles = {
     textDecoration: "none",
     color: "black",
@@ -67,7 +71,7 @@ export const Navigation = () => {
           </AuthCont>
           <AuthCont>
             <CartSection>
-              <Badge content={4}>
+              <Badge content={cart?.length}>
                 <ShoppingBagOutlined />
               </Badge>
             </CartSection>

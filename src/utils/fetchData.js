@@ -7,6 +7,7 @@ export const categoriesOptions = {
 };
 
 export const categoriesURL = "https://dummyjson.com/products/categories";
+export const allProductsURL = "https://fakestoreapi.com/products";
 
 export const fetchData = async (url, options) => {
   const response = await fetch(url, options);

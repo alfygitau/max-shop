@@ -8,20 +8,61 @@ import {
 import { Link } from "react-router-dom";
 import { Badge } from "rsuite";
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/CartContext/CartContext";
+import { Modal } from "rsuite";
+import { Button } from "rsuite";
 
 // images
 import logo from "../../images/logo.svg";
-
 export const Navigation = () => {
   const { cart } = useContext(CartContext);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const linkStyles = {
     textDecoration: "none",
     color: "black",
     marginRight: "10px",
     padding: "10px",
+  };
+  const ModalX = () => {
+    return (
+      <ModalContainer>
+        <Modal
+          backdrop={true}
+          keyboard={false}
+          open={open}
+          onClose={handleClose}
+          style={{ position: "absolute", right: "0", top: "50px" }}
+          size="xs"
+        >
+          <Modal.Header>
+            <Modal.Title>Cart Items</Modal.Title>
+          </Modal.Header>
+          {cart.map((item) => (
+            <Modal.Body>{item.title}</Modal.Body>
+          ))}
+          <Modal.Footer>
+            <Button onClick={handleClose} appearance="primary">
+              Ok
+            </Button>
+            <Button onClick={handleClose} appearance="subtle">
+              Cancel
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </ModalContainer>
+    );
+  };
+
+  const handleMouseOver = () => {
+    handleOpen();
+  };
+
+  const handleMouseOut = () => {
+    handleClose();
   };
 
   return (
@@ -70,7 +111,11 @@ export const Navigation = () => {
             </Link>
           </AuthCont>
           <AuthCont>
-            <CartSection>
+            <CartSection
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+            >
+              {open && <ModalX />}
               <Badge content={cart?.length}>
                 <ShoppingBagOutlined />
               </Badge>
@@ -143,3 +188,5 @@ const AuthCont = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+const ModalContainer = styled.div``;

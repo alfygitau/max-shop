@@ -39,6 +39,13 @@ const ProductCard = ({ product }) => {
             style: "currency",
             currency: "USD",
           })}
+          &nbsp; &nbsp;
+          <Span>
+            {product.price.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
+          </Span>
         </Price>
       </Info>
       <ButtonWrapper>
@@ -61,9 +68,7 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
   width: 200px;
   height: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: auto;
 `;
 const Image = styled.img`
   width: 100%;
@@ -93,4 +98,10 @@ const Info = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+`;
+const Span = styled.span`
+  text-decoration: line-through;
+  color: black;
+  font-weight: lighter;
+  font-size: 14px;
 `;

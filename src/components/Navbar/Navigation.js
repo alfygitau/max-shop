@@ -15,11 +15,17 @@ import { Button } from "rsuite";
 
 // images
 import logo from "../../images/logo.svg";
+
+
 export const Navigation = () => {
   const { cart } = useContext(CartContext);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const linkStyles = {
     textDecoration: "none",
@@ -35,7 +41,7 @@ export const Navigation = () => {
           keyboard={false}
           open={open}
           onClose={handleClose}
-          style={{ position: "absolute", right: "0", top: "50px" }}
+          style={{ position: "fixed", right: "0", top: "50px" }}
           size="xs"
         >
           <Modal.Header>
@@ -63,6 +69,7 @@ export const Navigation = () => {
 
   const handleMouseOut = () => {
     handleClose();
+    window.scrollTo(0, 0);
   };
 
   return (

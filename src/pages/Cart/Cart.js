@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
+
+  const total = cart.reduce((ac, cv) => ac + cv.price, 0);
   return (
     <Wrapper>
       <Container>
@@ -57,7 +59,38 @@ const Cart = () => {
             ))
           )}
         </CartItems>
-        <Summary></Summary>
+        <Summary>
+          <p
+            style={{
+              textAlign: "center",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Cart Summary
+          </p>
+
+          <Content>
+            {cart.map((item) => (
+              <CartInfo>
+                <p>{item.title}</p>
+                <p>
+                  {item.price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </p>
+              </CartInfo>
+            ))}
+          </Content>
+          <Total>
+            <strong>Cart Total: </strong>{" "}
+            {total.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
+          </Total>
+        </Summary>
       </Container>
     </Wrapper>
   );
@@ -91,6 +124,7 @@ const Summary = styled.div`
   height: 70vh;
   border: 1px solid black;
   gap: 1em;
+  flex-direction: column;
 `;
 const Header = styled.div`
   display: flex;
@@ -154,4 +188,17 @@ const CartPrice = styled.div`
   flex: 1;
   justify-content: center;
   /* border: 1px solid black; */
+`;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CartInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+`;
+const Total = styled.span`
+  padding: 5px 15px;
+  font-size: 20px;
 `;

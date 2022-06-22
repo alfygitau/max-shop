@@ -14,7 +14,7 @@ export const Tabs = () => {
         <NavLink style={linkStyles} to="/">
           Home
         </NavLink>
-        <NavLink style={linkStyles} to="/">
+        <NavLink style={linkStyles} to="/store">
           Store
         </NavLink>
         <NavLink style={linkStyles} to="/">

@@ -16,7 +16,6 @@ import { Button } from "rsuite";
 // images
 import logo from "../../images/logo.svg";
 
-
 export const Navigation = () => {
   const { cart } = useContext(CartContext);
   const [open, setOpen] = useState(false);
@@ -47,9 +46,11 @@ export const Navigation = () => {
           <Modal.Header>
             <Modal.Title>Cart Items</Modal.Title>
           </Modal.Header>
-          {cart.map((item) => (
-            <Modal.Body>{item.title}</Modal.Body>
-          ))}
+          {cart.length < 1 ? (
+            <p>No cart Items</p>
+          ) : (
+            cart.map((item) => <Modal.Body>{item.title}</Modal.Body>)
+          )}
           <Modal.Footer>
             <Button onClick={handleClose} appearance="primary">
               Ok

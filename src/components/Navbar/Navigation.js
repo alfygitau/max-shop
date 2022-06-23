@@ -12,12 +12,15 @@ import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/CartContext/CartContext";
 import { Modal } from "rsuite";
 import { Button } from "rsuite";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import {ProductsListContext} from "../../contexts/ProductsListContext/ProductsListContext"
 
 // images
 import logo from "../../images/logo.svg";
 
 export const Navigation = () => {
   const { cart } = useContext(CartContext);
+  const { products: items } = useContext(ProductsListContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -25,6 +28,8 @@ export const Navigation = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log("items", items)
 
   const linkStyles = {
     textDecoration: "none",
@@ -73,6 +78,40 @@ export const Navigation = () => {
     window.scrollTo(0, 0);
   };
 
+
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results);
+  };
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result);
+  };
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item);
+  };
+
+  const handleOnFocus = () => {
+    console.log("Focused");
+  };
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: "block", textAlign: "left" }}>
+          category: {item.category}
+        </span>
+        <span style={{ display: "block", textAlign: "left" }}>
+          Title: {item.title}
+        </span>
+      </>
+    );
+  };
+
   return (
     <Wrapper>
       <Nav>
@@ -80,24 +119,31 @@ export const Navigation = () => {
           <Image src={logo} alt="logo" />
         </Logo>
         <SearchSection>
-          <input
-            type="text"
-            class="form-control"
-            style={{ borderRadius: "0" }}
-            placeholder="Search for products, brand, category or materials"
-            aria-describedby="basic-addon2"
-          />
-          <span
-            class="input-group-text"
-            id="basic-addon2"
-            style={{
-              borderRadius: "0",
-              backgroundColor: "black",
-              border: "1px solid black",
-            }}
-          >
-            <Search style={{ color: "white" }} />
-          </span>
+          <div style={{ width: 650 }}>
+            <ReactSearchAutocomplete
+              items={items}
+              fuseOptions={{ keys: ["title", "category"] }} // Search on both fields
+              resultStringKeyName="title"
+              onSearch={handleOnSearch}
+              onHover={handleOnHover}
+              onSelect={handleOnSelect}
+              onFocus={handleOnFocus}
+              autoFocus
+              formatResult={formatResult}
+              styling={{
+                height: "40px",
+                border: "1px solid black",
+                borderRadius: "4px",
+                backgroundColor: "white",
+                boxShadow: "none",
+                color: "black",
+                fontSize: "16px",
+                iconColor: "black",
+                clearIconMargin: "3px 8px 0 0",
+                zIndex: 2,
+              }}
+            />
+          </div>
         </SearchSection>
         <Authentication>
           <AuthCont>

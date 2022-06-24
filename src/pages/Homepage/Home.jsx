@@ -15,17 +15,21 @@ import {
   categoriesOptions,
   categoriesURL,
   fetchData,
+  phonesOptions,
+  phonesURL,
   shoesOptions,
   shoesURL,
 } from "../../utils/fetchData";
 import { ProductsListContext } from "../../contexts/ProductsListContext/ProductsListContext";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { ShoesContext } from "../../contexts/ShoesContext/ShoesContext";
+import { PhonesContext } from "../../contexts/Phones/PhonesContext";
 
 export const Home = () => {
   const { categories, setCategories } = useContext(CategoriesContext);
   const { products, setProducts } = useContext(ProductsListContext);
   const { shoes, setShoes } = useContext(ShoesContext);
+  const { phones, setPhones } = useContext(PhonesContext);
 
   const linkStyles = {
     textDecoration: "none",
@@ -59,6 +63,8 @@ export const Home = () => {
       setProducts(productsData);
       const shoesData = await fetchData(shoesURL, shoesOptions);
       setShoes(shoesData);
+      const phonesData = await fetchData(phonesURL, phonesOptions);
+      setPhones(phonesData);
     };
 
     fetchCategoriesData();
@@ -123,6 +129,18 @@ export const Home = () => {
           <Title>Best Selling Products</Title>
           <Slider {...settings}>
             {shoes.map((product) => (
+              <div key={product.id}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </View>
+      <View>
+        <div>
+          <Title>Best Selling Products</Title>
+          <Slider {...settings}>
+            {phones.map((product) => (
               <div key={product.id}>
                 <ProductCard product={product} />
               </div>

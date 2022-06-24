@@ -9,7 +9,7 @@ const Store = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const { products } = useContext(ProductsListContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(4);
+  const [productsPerPage] = useState(4);
   const count = (products.length) / productsPerPage
 
   const titleStyles = {
@@ -19,7 +19,6 @@ const Store = () => {
   const selectStyles = {
     margin: "10px",
     width: "220px",
-    // border: "none",
     fontSize: "18px",
   };
   const options = [

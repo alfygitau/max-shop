@@ -30,7 +30,6 @@ const ProductCard = ({ product }) => {
       <ImageWrapper>
         <Image src={product.image} alt="product" />
       </ImageWrapper>
-      {/* <Hr /> */}
       <Info>
         <Content>{product?.category.toUpperCase()}</Content>
         <Content>{product.title.slice(0, 40)}</Content>
@@ -74,9 +73,6 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-`;
-const Hr = styled.hr`
-  border: 1px solid black;
 `;
 const Content = styled.p`
   padding-left: 10px;

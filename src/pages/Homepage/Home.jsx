@@ -56,6 +56,7 @@ export const Home = () => {
     };
 
     fetchCategoriesData();
+    // eslint-disable-next-line 
   }, []);
 
   console.log(products);

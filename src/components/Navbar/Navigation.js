@@ -2,7 +2,6 @@
 import {
   AccountCircleOutlined,
   FavoriteBorderOutlined,
-  Search,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";

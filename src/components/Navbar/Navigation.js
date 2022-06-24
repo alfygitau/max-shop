@@ -52,7 +52,7 @@ export const Navigation = () => {
           {cart.length < 1 ? (
             <p>No cart Items</p>
           ) : (
-            cart.map((item) => <Modal.Body>{item.title}</Modal.Body>)
+            cart.map((item) => <Modal.Body>{item.name}</Modal.Body>)
           )}
           <Modal.Footer>
             <Button onClick={handleClose} appearance="primary">

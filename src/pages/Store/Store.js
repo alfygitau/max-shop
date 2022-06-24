@@ -46,7 +46,7 @@ const Store = () => {
   // get current posts
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
+  const currentProducts = products?.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );

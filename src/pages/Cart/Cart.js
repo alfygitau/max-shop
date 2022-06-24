@@ -41,7 +41,7 @@ const Cart = () => {
                     />
                   </CartImage>
                   <CartTitle>
-                    <p>{item.title}</p>
+                    <p>{item.name}</p>
                   </CartTitle>
                   <CartQuantity>
                     <p>1</p>
@@ -73,7 +73,7 @@ const Cart = () => {
           <Content>
             {cart.map((item) => (
               <CartInfo>
-                <p>{item.title}</p>
+                <p>{item.name}</p>
                 <p>
                   {item.price.toLocaleString("en-US", {
                     style: "currency",

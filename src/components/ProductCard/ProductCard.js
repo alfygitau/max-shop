@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
     const cartItems = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    if (cartItems.find((item) => item.id === product.id)) {
+    if (cartItems.find((item) => item.name === product.name)) {
       return cartItems;
     } else {
       cartItems?.push(product);

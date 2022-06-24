@@ -14,6 +14,10 @@ import CartContextProvider from "./contexts/CartContext/CartContext";
 import ShoesContextProvider from "./contexts/ShoesContext/ShoesContext";
 import PhonesContextProvider from "./contexts/Phones/PhonesContext";
 import StoresContextProvider from "./contexts/Stores/StoresContext";
+import { Auth0Provider } from "@auth0/auth0-react";
+
+const domain = "dev-n7qjfx3r.us.auth0.com"
+const clientId = "wZHDG5zVUS5BV63FykpwvN51efFc8YJ3"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,9 +29,15 @@ root.render(
             <CategoriesContextProvider>
               <CartContextProvider>
                 <BrowserRouter>
-                  <Routes>
-                    <Route path="/*" element={<App />} />
-                  </Routes>
+                  <Auth0Provider
+                    domain={domain}
+                    clientId={clientId}
+                    redirectUri={window.location.origin}
+                  >
+                    <Routes>
+                      <Route path="/*" element={<App />} />
+                    </Routes>
+                  </Auth0Provider>
                 </BrowserRouter>
               </CartContextProvider>
             </CategoriesContextProvider>

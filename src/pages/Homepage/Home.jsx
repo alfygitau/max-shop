@@ -112,9 +112,9 @@ export const Home = () => {
       </Main>
       <View>
         <div>
-          <Title>New Products</Title>
+          <Title>Samsung Phones</Title>
           <Slider {...settings}>
-            {products.map((product) => (
+            {products?.map((product) => (
               <div key={product.id}>
                 <ProductCard product={product} />
               </div>
@@ -126,7 +126,7 @@ export const Home = () => {
         <div>
           <Title>Best Selling Products</Title>
           <Slider {...settings}>
-            {shoes.map((product) => (
+            {shoes?.map((product) => (
               <div key={product.id}>
                 <ProductCard product={product} />
               </div>

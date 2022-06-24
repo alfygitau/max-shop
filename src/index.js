@@ -13,6 +13,7 @@ import ProductsListContextProvider from "./contexts/ProductsListContext/Products
 import CartContextProvider from "./contexts/CartContext/CartContext";
 import ShoesContextProvider from "./contexts/ShoesContext/ShoesContext";
 import PhonesContextProvider from "./contexts/Phones/PhonesContext";
+import StoresContextProvider from "./contexts/Stores/StoresContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,15 +21,17 @@ root.render(
     <ProductsListContextProvider>
       <ShoesContextProvider>
         <PhonesContextProvider>
-          <CategoriesContextProvider>
-            <CartContextProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/*" element={<App />} />
-                </Routes>
-              </BrowserRouter>
-            </CartContextProvider>
-          </CategoriesContextProvider>
+          <StoresContextProvider>
+            <CategoriesContextProvider>
+              <CartContextProvider>
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/*" element={<App />} />
+                  </Routes>
+                </BrowserRouter>
+              </CartContextProvider>
+            </CategoriesContextProvider>
+          </StoresContextProvider>
         </PhonesContextProvider>
       </ShoesContextProvider>
     </ProductsListContextProvider>

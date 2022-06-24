@@ -7,7 +7,8 @@ export const categoriesOptions = {
 };
 
 export const categoriesURL = "https://dummyjson.com/products/categories";
-export const allProductsURL = "https://fakestoreapi.com/products";
+export const allProductsURL =
+"https://jumia-service.p.rapidapi.com/api/category/samsung/products";
 
 // shoes
 export const shoesURL = "https://jumia-service.p.rapidapi.com/api/bestSales";
@@ -23,6 +24,15 @@ export const phonesURL =
   "https://jumia-service.p.rapidapi.com/api/category/iphone/products";
 
 export const phonesOptions = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "668789db1bmsh307a14da308a791p1eb6fdjsn41b5a3c35d23",
+    "X-RapidAPI-Host": "jumia-service.p.rapidapi.com",
+  },
+};
+
+export const storesURL = "https://jumia-service.p.rapidapi.com/api/stores";
+export const storesOptions = {
   method: "GET",
   headers: {
     "X-RapidAPI-Key": "668789db1bmsh307a14da308a791p1eb6fdjsn41b5a3c35d23",

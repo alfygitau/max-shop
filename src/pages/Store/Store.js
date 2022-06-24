@@ -4,13 +4,18 @@ import Select from "react-dropdown-select";
 import { ProductsListContext } from "../../contexts/ProductsListContext/ProductsListContext";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { Pagination } from "@mui/material";
+import { PhonesContext } from "../../contexts/Phones/PhonesContext";
 
 const Store = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const { products } = useContext(ProductsListContext);
+  const { phones } = useContext(PhonesContext);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage1, setCurrentPage1] = useState(1);
   const [productsPerPage] = useState(4);
-  const count = (products.length) / productsPerPage
+  const [phonesPerPage] = useState(4);
+  const count = products.length / productsPerPage;
+  const count1 = phones.length / phonesPerPage;
 
   const titleStyles = {
     textAlign: "center",
@@ -45,10 +50,15 @@ const Store = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+  const indexOfLastPhone = currentPage * phonesPerPage;
+  const indexOfFirstPhone = indexOfLastPhone - phonesPerPage;
+  const currentPhones = phones.slice(indexOfFirstPhone, indexOfLastPhone);
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
+    setCurrentPage1(value)
   };
+  
 
   return (
     <Container>
@@ -80,19 +90,34 @@ const Store = () => {
             placeholder="PRICE"
           />
         </Filters>
-        <ProductsContainer>
-          {currentProducts.map((product) => (
-            <ProductCard product={product} key={product.id} />
-          ))}
-          <Pagination
-            count={count}
-            variant="outlined"
-            shape="rounded"
-            style={{ marginBottom: "20px" }}
-            page={currentPage}
-            onChange={handleChange}
-          />
-        </ProductsContainer>
+        <ProductsWrapper>
+          <ProductsContainer>
+            {currentProducts.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+            <Pagination
+              count={count}
+              variant="outlined"
+              shape="rounded"
+              style={{ marginBottom: "20px" }}
+              page={currentPage}
+              onChange={handleChange}
+            />
+          </ProductsContainer>
+          <ProductsContainer>
+            {currentPhones.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+            <Pagination
+              count={count1}
+              variant="outlined"
+              shape="rounded"
+              style={{ marginBottom: "20px" }}
+              page={currentPage1}
+              onChange={handleChange}
+            />
+          </ProductsContainer>
+        </ProductsWrapper>
       </Wrapper>
     </Container>
   );
@@ -122,9 +147,16 @@ const Filters = styled.div`
 `;
 const ProductsContainer = styled.div`
   display: flex;
-  flex: 8;
   border: 1px solid black;
   flex-wrap: wrap;
   height: fit-content;
   justify-content: center;
+`;
+const ProductsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 8;
+  height: fit-content;
+  gap: 2em;
+  margin-bottom: 20px;
 `;

@@ -59,7 +59,7 @@ export const Home = () => {
     const fetchCategoriesData = async () => {
       const categoriesData = await fetchData(categoriesURL, categoriesOptions);
       setCategories(categoriesData);
-      const productsData = await fetchData(allProductsURL, categoriesOptions);
+      const productsData = await fetchData(allProductsURL, phonesOptions);
       setProducts(productsData);
       const shoesData = await fetchData(shoesURL, shoesOptions);
       setShoes(shoesData);
@@ -70,8 +70,6 @@ export const Home = () => {
     fetchCategoriesData();
     // eslint-disable-next-line
   }, []);
-
-  console.log("shoes", shoes);
 
   return (
     <Box>
@@ -138,7 +136,7 @@ export const Home = () => {
       </View>
       <View>
         <div>
-          <Title>Best Selling Products</Title>
+          <Title>Best Selling iPhones</Title>
           <Slider {...settings}>
             {phones.map((product) => (
               <div key={product.id}>
@@ -174,18 +172,15 @@ const Categories = styled.div`
 `;
 const SliderSection = styled.div`
   width: 80%;
-  /* border: 1px solid rgb(237, 241, 255); */
   height: 60vh;
 `;
 const View = styled.div`
   width: 90%;
   height: fit-content;
-  border: 1px solid black;
   margin-top: 20px;
   margin-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
-  /* background-color: blue; */
 `;
 const ImageContainer = styled.div`
   width: 100%;

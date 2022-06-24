@@ -31,8 +31,7 @@ const ProductCard = ({ product }) => {
         <Image src={product.image} alt="product" />
       </ImageWrapper>
       <Info>
-        <Content>{product?.category.toUpperCase()}</Content>
-        <Content>{product.title.slice(0, 40)}</Content>
+        <Content>{product.name || product.title.slice(0, 40)}</Content>
         <Price>
           {product.price.toLocaleString("en-US", {
             style: "currency",
@@ -66,7 +65,7 @@ const Wrapper = styled.div`
 `;
 const ImageWrapper = styled.div`
   width: 200px;
-  height: 70%;
+  height: 60%;
   margin: auto;
 `;
 const Image = styled.img`
@@ -94,6 +93,7 @@ const Info = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-top: 10px;
 `;
 const Span = styled.span`
   text-decoration: line-through;

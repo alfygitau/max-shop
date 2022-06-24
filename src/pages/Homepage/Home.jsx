@@ -15,13 +15,17 @@ import {
   categoriesOptions,
   categoriesURL,
   fetchData,
+  shoesOptions,
+  shoesURL,
 } from "../../utils/fetchData";
 import { ProductsListContext } from "../../contexts/ProductsListContext/ProductsListContext";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { ShoesContext } from "../../contexts/ShoesContext/ShoesContext";
 
 export const Home = () => {
   const { categories, setCategories } = useContext(CategoriesContext);
   const { products, setProducts } = useContext(ProductsListContext);
+  const { shoes, setShoes } = useContext(ShoesContext);
 
   const linkStyles = {
     textDecoration: "none",
@@ -37,7 +41,6 @@ export const Home = () => {
   };
 
   let settings = {
-    dots: true,
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -45,6 +48,7 @@ export const Home = () => {
     speed: 2000,
     autoplaySpeed: 2000,
     cssEase: "linear",
+    showArrows: true,
   };
 
   useEffect(() => {
@@ -53,13 +57,15 @@ export const Home = () => {
       setCategories(categoriesData);
       const productsData = await fetchData(allProductsURL, categoriesOptions);
       setProducts(productsData);
+      const shoesData = await fetchData(shoesURL, shoesOptions);
+      setShoes(shoesData);
     };
 
     fetchCategoriesData();
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, []);
 
-  console.log(products);
+  console.log("shoes", shoes);
 
   return (
     <Box>
@@ -102,9 +108,21 @@ export const Home = () => {
       </Main>
       <View>
         <div>
-          <Title>Popular Products</Title>
+          <Title>New Products</Title>
           <Slider {...settings}>
             {products.map((product) => (
+              <div key={product.id}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </View>
+      <View>
+        <div>
+          <Title>Best Selling Products</Title>
+          <Slider {...settings}>
+            {shoes.map((product) => (
               <div key={product.id}>
                 <ProductCard product={product} />
               </div>
@@ -143,10 +161,10 @@ const SliderSection = styled.div`
 `;
 const View = styled.div`
   width: 90%;
-  height: 55vh;
-  /* border: 1px solid black; */
+  height: fit-content;
+  border: 1px solid black;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
   /* background-color: blue; */

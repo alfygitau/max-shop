@@ -12,7 +12,7 @@ import { CartContext } from "../../contexts/CartContext/CartContext";
 import { Modal } from "rsuite";
 import { Button } from "rsuite";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import {ProductsListContext} from "../../contexts/ProductsListContext/ProductsListContext"
+import { ProductsListContext } from "../../contexts/ProductsListContext/ProductsListContext";
 
 // images
 import logo from "../../images/logo.svg";
@@ -21,14 +21,13 @@ export const Navigation = () => {
   const { cart } = useContext(CartContext);
   const { products: items } = useContext(ProductsListContext);
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => {
-    setOpen(true);
+    setOpen((prevState) => !prevState);
   };
   const handleClose = () => {
-    setOpen(false);
+    setOpen((prevState) => !prevState);
   };
-
-  console.log("items", items)
 
   const linkStyles = {
     textDecoration: "none",
@@ -74,9 +73,7 @@ export const Navigation = () => {
 
   const handleMouseOut = () => {
     handleClose();
-    window.scrollTo(0, 0);
   };
-
 
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
@@ -165,8 +162,8 @@ export const Navigation = () => {
           </AuthCont>
           <AuthCont>
             <CartSection
-              onMouseOver={handleMouseOver}
-              onMouseOut={handleMouseOut}
+              onMouseEnter={handleMouseOver}
+              onMouseLeave={handleMouseOut}
             >
               {open && <ModalX />}
               <Badge content={cart?.length}>

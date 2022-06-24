@@ -11,20 +11,23 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductsListContextProvider from "./contexts/ProductsListContext/ProductsListContext";
 import CartContextProvider from "./contexts/CartContext/CartContext";
+import ShoesContextProvider from "./contexts/ShoesContext/ShoesContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ProductsListContextProvider>
-      <CategoriesContextProvider>
-        <CartContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/*" element={<App />} />
-            </Routes>
-          </BrowserRouter>
-        </CartContextProvider>
-      </CategoriesContextProvider>
+      <ShoesContextProvider>
+        <CategoriesContextProvider>
+          <CartContextProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/*" element={<App />} />
+              </Routes>
+            </BrowserRouter>
+          </CartContextProvider>
+        </CategoriesContextProvider>
+      </ShoesContextProvider>
     </ProductsListContextProvider>
   </React.StrictMode>
 );

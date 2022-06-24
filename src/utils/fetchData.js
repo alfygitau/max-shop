@@ -9,6 +9,16 @@ export const categoriesOptions = {
 export const categoriesURL = "https://dummyjson.com/products/categories";
 export const allProductsURL = "https://fakestoreapi.com/products";
 
+// shoes
+export const shoesURL = "https://jumia-service.p.rapidapi.com/api/bestSales";
+export const shoesOptions = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "668789db1bmsh307a14da308a791p1eb6fdjsn41b5a3c35d23",
+    "X-RapidAPI-Host": "jumia-service.p.rapidapi.com",
+  },
+};
+
 export const fetchData = async (url, options) => {
   const response = await fetch(url, options);
   const data = await response.json();

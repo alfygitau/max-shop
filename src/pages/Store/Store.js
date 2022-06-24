@@ -1,18 +1,25 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Select from "react-dropdown-select";
+import { ProductsListContext } from "../../contexts/ProductsListContext/ProductsListContext";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import { Pagination } from "@mui/material";
 
 const Store = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const { products } = useContext(ProductsListContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(4);
+  const count = (products.length) / productsPerPage
 
   const titleStyles = {
     textAlign: "center",
-    fontSize: "18px",
+    fontSize: "15px",
   };
   const selectStyles = {
     margin: "10px",
-    width: "200px",
-    border: "none",
+    width: "220px",
+    // border: "none",
     fontSize: "18px",
   };
   const options = [
@@ -22,8 +29,8 @@ const Store = () => {
     { value: "Women's clothing", label: "Women's clothing" },
   ];
   const priceOptions = [
-    { value: "high-low", label: "high-low" },
-    { value: "low-high", label: "low-high" },
+    { value: "High-low", label: "High-low" },
+    { value: "Low-high", label: "Low-high" },
   ];
   const colorOptions = [
     { value: "Black", label: "Black" },
@@ -32,11 +39,23 @@ const Store = () => {
     { value: "Yellow", label: "Yellow" },
   ];
 
+  // get current posts
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
     <Container>
       <Wrapper>
         <Filters>
-          <p style={titleStyles}>Filters</p>
+          <p style={titleStyles}>FILTERS</p>
           <Select
             defaultValue={selectedOption}
             onChange={setSelectedOption}
@@ -53,7 +72,7 @@ const Store = () => {
             placeholder="COLOR"
           />
 
-          <p style={titleStyles}>Sort</p>
+          <p style={titleStyles}>SORT</p>
           <Select
             defaultValue={selectedOption}
             onChange={setSelectedOption}
@@ -63,7 +82,17 @@ const Store = () => {
           />
         </Filters>
         <ProductsContainer>
-
+          {currentProducts.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+          <Pagination
+            count={count}
+            variant="outlined"
+            shape="rounded"
+            style={{ marginBottom: "20px" }}
+            page={currentPage}
+            onChange={handleChange}
+          />
         </ProductsContainer>
       </Wrapper>
     </Container>
@@ -82,7 +111,6 @@ const Wrapper = styled.div`
   display: flex;
   /* border: 1px solid black; */
   gap: 1em;
-  height: 60vh;
   margin-top: 20px;
 `;
 const Filters = styled.div`
@@ -90,33 +118,14 @@ const Filters = styled.div`
   flex: 2;
   border: 1px solid black;
   flex-direction: column;
+  align-items: center;
+  height: 60vh;
 `;
 const ProductsContainer = styled.div`
   display: flex;
   flex: 8;
   border: 1px solid black;
+  flex-wrap: wrap;
+  height: fit-content;
+  justify-content: center;
 `;
-// const Select = styled.select`
-//   width: 250px;
-//   padding: 5px;
-//   margin-bottom: 10px;
-//   margin-left: 10px;
-//   background-color: transparent;
-//   border: none;
-//   font-size: 18px;
-//   font-weight: 200;
-//   &::-ms-expand {
-//     display: none;
-//     outline: none;
-//   }
-//   &:active {
-//     outline: none;
-//   }
-// `;
-// const Option = styled.option`
-//   background: white;
-//   color: black;
-//   &:checked {
-//     background: black;
-//   }
-// `;

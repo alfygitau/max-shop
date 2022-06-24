@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
       </ImageWrapper>
       {/* <Hr /> */}
       <Info>
-        <Content>{product.category.toUpperCase()}</Content>
+        <Content>{product?.category.toUpperCase()}</Content>
         <Content>{product.title.slice(0, 40)}</Content>
         <Price>
           {product.price.toLocaleString("en-US", {

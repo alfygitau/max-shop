@@ -174,7 +174,7 @@ const CartImage = styled.div`
 const CartTitle = styled.div`
   display: flex;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
   /* border: 1px solid black; */
 `;
 const CartQuantity = styled.div`
@@ -201,4 +201,5 @@ const CartInfo = styled.div`
 const Total = styled.span`
   padding: 5px 15px;
   font-size: 20px;
+  text-align: center;
 `;
